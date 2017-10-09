@@ -17,9 +17,7 @@ class MainController extends CController
      * @var array
      */
     public $css = [
-        '/web/css/components.min.css',
         '/web/css/site.css',
-        '/web/css/animate.css',
     ];
 
     /**
@@ -28,7 +26,7 @@ class MainController extends CController
      * @var array
      */
     public $js = [
-        '/web/js/app.js',
+        '/web/js/site.js',
     ];
 
     /**
