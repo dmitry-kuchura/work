@@ -4,7 +4,7 @@ class m171009_091006_users extends CDbMigration
 {
     public function up()
     {
-        $this->createTable('tbl_news', [
+        $this->createTable('users', [
             'id' => 'pk',
             'name' => 'varchar(150) NOT NULL',
             'email' => 'varchar(50) NOT NULL',
@@ -14,7 +14,7 @@ class m171009_091006_users extends CDbMigration
 
     public function down()
     {
-        $this->dropTable('tbl_news');
+        $this->dropTable('users');
     }
 
     /*

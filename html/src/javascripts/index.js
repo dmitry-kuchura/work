@@ -1,6 +1,7 @@
-import {$,jQuery} from 'jquery';
+let jQuery = require("jquery");
+let $ = jQuery;
+window.jQuery = require('jquery');
 
-window.$ = $;
-window.jQuery = jQuery;
+let bootstrap = require("bootstrap-sass/assets/javascripts/bootstrap.js");
 
 console.log(`app.js has loaded!`);

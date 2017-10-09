@@ -1,4 +1,9 @@
-<?php /* @var $this Controller */ ?>
+<?php
+
+/* @var $this Controller */
+/* @var $content string */
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,22 +17,6 @@
     <div id="header">
         <div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
     </div>
-    <div id="mainmenu">
-        <?php $this->widget('zii.widgets.CMenu', [
-            'items' => [
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/page', 'view' => 'about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
-                ['label' => 'Login', 'url' => ['/site/login'], 'visible' => Yii::app()->user->isGuest],
-                ['label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => ['/site/logout'], 'visible' => !Yii::app()->user->isGuest],
-            ],
-        ]); ?>
-    </div>
-    <?php if (isset($this->breadcrumbs)): ?>
-        <?php $this->widget('zii.widgets.CBreadcrumbs', [
-            'links' => $this->breadcrumbs,
-        ]); ?>
-    <?php endif ?>
     <?php echo $content ?>
     <div class="clear"></div>
     <div id="footer">

@@ -26,7 +26,7 @@ class MainController extends CController
      * @var array
      */
     public $js = [
-        '/web/js/site.js',
+        '/web/js/app.js',
     ];
 
     /**
