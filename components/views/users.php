@@ -1,6 +1,6 @@
 <?php /* @var $result Users */ ?>
 
-<?php echo CHtml::link('Add / Create', '#', ['class' => 'btn btn-success modal-btn', 'data-target' => 'api/create-user']); ?>
+<?php echo CHtml::link('Add / Create', '#', ['class' => 'btn btn-success modal-btn', 'data-target' => 'api/createUser']); ?>
 <hr>
 <?php if ($result): ?>
     <ul id="usersData" class="list-group usersData">

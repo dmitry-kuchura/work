@@ -4,7 +4,7 @@
 $this->pageTitle = Yii::app()->name;
 ?>
 
-<div class="profile">
+<div>
     <div class="tabbable-line tabbable-full-width">
         <ul class="nav nav-tabs">
             <li class="active">
@@ -36,3 +36,4 @@ $this->pageTitle = Yii::app()->name;
         </div>
     </div>
 </div>
+<?php $this->widget('application.components.PopupWidget'); ?>

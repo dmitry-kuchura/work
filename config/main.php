@@ -38,7 +38,8 @@ return [
             'urlFormat' => 'path',
             'showScriptName' => false,
             'rules' => [
-                'api/<action:\w+>' => 'api/<action>',
+//                'api/create-user' => 'api/CreateUser',
+                'api/<action>' => 'api/<action>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',

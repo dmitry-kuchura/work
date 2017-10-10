@@ -11,9 +11,10 @@ class ApiController extends MainController
         return true;
     }
 
-    public function actionCreate()
+    public function actionCreateUser()
     {
-
+        var_dump($this->post);
+        die;
     }
 
     public function actionDelete()
