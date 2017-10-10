@@ -25,12 +25,12 @@ $this->pageTitle = Yii::app()->name;
             </div>
             <div class="tab-pane" id="companies">
                 <div class="row">
-                    <?php //echo Company::widget(); ?>
+                    <?php $this->widget('application.components.CompaniesWidget'); ?>
                 </div>
             </div>
             <div class="tab-pane" id="abusers">
                 <div class="row">
-                    <?php //echo Abusers::widget(); ?>
+                    <?php $this->widget('application.components.TransferLogsWidget'); ?>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 <?php /* @var $result Users */ ?>
 
-<a class="btn btn-success modal-btn" data-target="#">Add / Create</a>
+<?php echo CHtml::link('Add / Create', '#', ['class' => 'btn btn-success modal-btn', 'data-target' => 'api/create-user']); ?>
 <hr>
 <?php if ($result): ?>
     <ul id="usersData" class="list-group usersData">
@@ -20,6 +20,6 @@
     </ul>
 <?php else: ?>
     <div class="alert alert-warning" role="alert">
-        <p>No data user to view. Please create user click to <strong>Add</strong> button.</p>
+        <p>No data user to view. Please create user click to <strong>Add / Create</strong> button.</p>
     </div>
 <?php endif; ?>

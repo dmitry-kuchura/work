@@ -3,7 +3,7 @@
 class UsersWidget extends CWidget
 {
     /**
-     *
+     * Widget class for display Users list at main page
      */
     public function run()
     {

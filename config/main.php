@@ -62,6 +62,32 @@ return [
         ],
     ],
     'params' => [
+        /**
+         * Types for transferred data bytes used in form create/update companies
+         */
+        'types' => [
+            'KB' => 'KB',
+            'MB' => 'MB',
+            'GB' => 'GB',
+            'TB' => 'TB',
+        ],
+        /**
+         * Months name for Report transferred traffic
+         */
+        'months' => [
+            1 => 'January',
+            2 => 'February',
+            3 => 'March',
+            4 => 'April',
+            5 => 'May',
+            6 => 'June',
+            7 => 'July',
+            8 => 'August',
+            9 => 'September',
+            10 => 'October',
+            11 => 'November',
+            12 => 'December',
+        ],
         'adminEmail' => 'webmaster@example.com',
     ],
 ];
