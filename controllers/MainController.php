@@ -17,9 +17,7 @@ class MainController extends CController
      * @var array
      */
     public $css = [
-        '/web/css/bootstrap/bootstrap-3.3.7.css',
-        '/web/css/custom.css',
-        '/web/css/bootstrap/components.css',
+        '/web/css/app.css',
     ];
 
     /**
@@ -28,11 +26,7 @@ class MainController extends CController
      * @var array
      */
     public $js = [
-        '/web/js/jquery/jquery-2.2.4.js',
-        '/web/js/bootstrap/bootstrap-3.3.7.js',
-        '/web/js/custom.js',
-        '/web/js/app.min.js',
-        '/web/js/layout.min.js',
+        '/web/js/app.js',
     ];
 
     /**
