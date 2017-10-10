@@ -5,4 +5,4 @@
 /vendor
 
 # Yarn directory
-/html
+/html/node_modules

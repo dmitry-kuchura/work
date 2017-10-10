@@ -1,0 +1,14 @@
+{
+  "name": "html",
+  "version": "1.0.0",
+  "main": "bundle.js",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "blendid": "^4.3.0",
+    "bootstrap": "3",
+    "bootstrap-sass": "^3.3.7",
+    "jquery": "2.2.x",
+    "noty": "^3.1.3"
+  }
+}
