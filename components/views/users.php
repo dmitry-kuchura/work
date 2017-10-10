@@ -1,8 +1,10 @@
-<a class="btn btn-success modal-btn" data-target="#">Add</a>
+<?php /* @var $result Users */ ?>
+
+<a class="btn btn-success modal-btn" data-target="#">Add / Create</a>
 <hr>
-<?php if ($data): ?>
+<?php if ($result): ?>
     <ul id="usersData" class="list-group usersData">
-        <?php foreach ($data as $obj): ?>
+        <?php foreach ($result as $obj): ?>
             <li class="list-group-item usersData-item">
                 <div class="usersData-item__text"><?php echo $obj->name . ' / ' . $obj->email . ' / '; ?><?php echo $obj->company->id ? $obj->company->name : 'Company deleted!'; ?></div>
                 <div class="usersData-item__buttons">

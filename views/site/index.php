@@ -20,7 +20,7 @@ $this->pageTitle = Yii::app()->name;
         <div class="tab-content">
             <div class="tab-pane active" id="users">
                 <div class="row">
-                    <?php $this->widget('application.components.Users'); ?>
+                    <?php $this->widget('application.components.UsersWidget'); ?>
                 </div>
             </div>
             <div class="tab-pane" id="companies">

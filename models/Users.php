@@ -8,6 +8,8 @@
  * @property string $name
  * @property string $email
  * @property integer $company_id
+ *
+ * @property Companies $company
  */
 class Users extends CActiveRecord
 {
@@ -16,7 +18,7 @@ class Users extends CActiveRecord
      */
     public function tableName()
     {
-        return '{{users}}';
+        return 'users';
     }
 
     /**
@@ -29,16 +31,6 @@ class Users extends CActiveRecord
             ['company_id', 'numerical', 'integerOnly' => true],
             ['name', 'length', 'max' => 150],
             ['email', 'length', 'max' => 50],
-            ['id, name, email, company_id', 'safe', 'on' => 'search'],
-        ];
-    }
-
-    /**
-     * @return array relational rules.
-     */
-    public function relations()
-    {
-        return [
         ];
     }
 
@@ -56,8 +48,16 @@ class Users extends CActiveRecord
     }
 
     /**
-     * Returns the static model of the specified AR class.
-     * Please note that you should have this exact method in all your CActiveRecord descendants!
+     * @return array relational rules.
+     */
+    public function relations()
+    {
+        return [
+            'company' => [self::HAS_ONE, 'Companies', 'company_id'],
+        ];
+    }
+
+    /**
      * @param string $className active record class name.
      * @return Users the static model class
      */
