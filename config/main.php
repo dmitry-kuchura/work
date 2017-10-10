@@ -38,9 +38,7 @@ return [
             'urlFormat' => 'path',
             'showScriptName' => false,
             'rules' => [
-                'gii'=>'gii',
-                'gii/<controller:\w+>'=>'gii/<controller>',
-                'gii/<controller:\w+>/<action:\w+>'=>'gii/<controller>/<action>',
+                'api/<action:\w+>' => 'api/<action>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',

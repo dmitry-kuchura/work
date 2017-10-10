@@ -14,15 +14,16 @@
 </head>
 <body>
 <div class="wrap">
-    <div id="header">
-        <div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
-    </div>
-    <?php echo $content ?>
-    <div class="clear"></div>
-    <div id="footer">
-        Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-        All Rights Reserved.<br/>
-        <?php echo Yii::powered(); ?>
+    <nav class="navbar-inverse navbar-fixed-top navbar" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <?php echo CHtml::link('Yii 1.x WEB Framework', Yii::app()->request->baseUrl, ['class' => 'navbar-brand']); ?>
+            </div>
+            <div class="collapse navbar-collapse"></div>
+        </div>
+    </nav>
+    <div class="container">
+        <?php echo $content ?>
     </div>
 </div>
 <?php $this->footer(); ?>
