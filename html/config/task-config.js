@@ -14,8 +14,8 @@ module.exports = {
     },
 
     browserSync: {
-        server: {
-            baseDir: 'work.loc'
+        proxy: {
+            target: 'work.loc'
         }
     },
 

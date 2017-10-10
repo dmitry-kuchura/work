@@ -27,6 +27,7 @@ class MainController extends CController
      */
     public $js = [
         '/web/js/app.js',
+        '/web/js/custom.js',
     ];
 
     /**

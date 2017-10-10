@@ -36,7 +36,7 @@ jQuery(document).ready(function ($) {
         var form = $(this);
         var action = $(this).attr('action');
         var data = new FormData($(this)[0]);
-
+        alert('3');
         $.ajax({
             url: action,
             type: 'POST',
