@@ -5,7 +5,7 @@
     <ul id="companyData" class="list-group usersData">
         <?php foreach ($result as $obj): ?>
             <li class="list-group-item usersData-item">
-                <div class="usersData-item__text"><?php //echo $obj->name . ' / ' . Helper::fileSizeConvert($obj->quota); ?></div>
+                <div class="usersData-item__text"><?php echo $obj->name . ' / ' . Helper::fileSizeConvert($obj->quota); ?></div>
                 <div class="usersData-item__buttons">
                     <button class="btn btn-info modal-btn"
                             data-target="<?php // Url::to(['/api/update-company', 'id' => $obj->id]); ?>">Edit

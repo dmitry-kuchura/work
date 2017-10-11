@@ -10,7 +10,7 @@ class UsersWidget extends CWidget
         $result = Users::model()->findAll();
 
         $this->render('users', [
-            'result' => $result
+            'result' => $result,
         ]);
     }
 }

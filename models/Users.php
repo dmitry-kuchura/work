@@ -53,7 +53,7 @@ class Users extends CActiveRecord
     public function relations()
     {
         return [
-            'company' => [self::HAS_ONE, 'Companies', 'company_id'],
+            'company' => [self::BELONGS_TO, 'Companies', 'company_id'],
         ];
     }
 
