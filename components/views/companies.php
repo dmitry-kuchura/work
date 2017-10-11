@@ -10,7 +10,8 @@
                     <button class="btn btn-info modal-btn"
                             data-target="<?php // Url::to(['/api/update-company', 'id' => $obj->id]); ?>">Edit
                     </button>
-                    <button class="btn btn-danger deleteButton" data-table="companies"
+                    <button class="btn btn-danger deleteButton"
+                            data-table="companies"
                             data-id="<?php echo $obj->id; ?>">
                         Delete
                     </button>

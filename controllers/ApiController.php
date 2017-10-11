@@ -3,10 +3,12 @@
 class ApiController extends MainController
 {
     public $post;
+    public $raw;
 
     protected function beforeAction($action)
     {
         $this->post = $_POST;
+        $this->raw = json_decode(Yii::app()->request->getRawBody());;
 
         return true;
     }
@@ -76,9 +78,22 @@ class ApiController extends MainController
         ]);
     }
 
+    /**
+     * This method deleted current row from database in needed table
+     */
     public function actionDelete()
     {
-        var_dump($this->post);
-        die;
+        $command = Yii::app()->db->createCommand();
+        if ($command->delete($this->raw->table, 'id=:id', [':id' => $this->raw->id])) {
+            $this->renderJSON([
+                'success' => true,
+                'message' => 'Record deleted!',
+            ]);
+        } else {
+            $this->renderJSON([
+                'success' => false,
+                'message' => 'Not deleted. Some want wrong!',
+            ]);
+        }
     }
 }

@@ -14,7 +14,8 @@
                     <button class="btn btn-info modal-btn"
                             data-target="#">Edit
                     </button>
-                    <button class="btn btn-danger deleteButton" data-table="users" data-id="<?php echo $obj->id; ?>">
+                    <button class="btn btn-danger deleteButton"
+                            data-table="users" data-id="<?php echo $obj->id; ?>">
                         Delete
                     </button>
                 </div>

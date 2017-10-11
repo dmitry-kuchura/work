@@ -4,15 +4,35 @@ global.jQuery = $;
 require('bootstrap');
 
 import axios from 'axios'
+import Noty from 'noty';
 
-console.log(`app.js has loaded!`);
+/**
+ * This function generated some messages with Noty
+ *
+ * @link https://github.com/needim/noty
+ * @param message
+ * @param type
+ * @param time
+ */
+function generate(message, type, time) {
+    new Noty({
+        type: type,
+        text: message,
+        timeout: time || false,
+        layout: 'bottomRight',
+        theme: 'metroui',
+        animation: {
+            open: 'animated bounceInRight',
+            close: 'animated bounceOutRight'
+        }
+    }).show();
+}
 
 /**
  * Call to modal window popup
  */
 let $modalBtn = $('.modal-btn');
 let $modalPopup = $('#modal-popup');
-
 if ($modalBtn.length) {
     $modalBtn.on('click', function () {
         let target = $(this).attr('data-target');
@@ -36,8 +56,9 @@ $('.modal-content').on('submit', '.form-ajax', function (event) {
 
     axios.post(action, data)
         .then(function (response) {
-            // $('.close').click();
-            // generate(response.message, 'success', 5000);
+            console.log(response.data);
+            $('.close').click();
+            generate(response.data.message, 'success', 5000);
             // setTimeout(function () {
             //     location.reload();
             // }, 1000);
@@ -49,3 +70,29 @@ $('.modal-content').on('submit', '.form-ajax', function (event) {
     return false;
 });
 
+/**
+ * Delete item from table
+ * Send table and row id
+ *
+ * @param table
+ * @param id
+ */
+$('.deleteButton').on('click', function () {
+    let element = $(this).closest('.usersData-item');
+    let table = $(this).data('table');
+    let id = $(this).data('id');
+
+    axios.post('api/delete', {
+        id: id,
+        table: table
+    })
+        .then(function (response) {
+            if (response.data.success === true) {
+                generate(response.data.message, 'success', 5000);
+                element.slideUp();
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+});
