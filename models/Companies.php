@@ -67,4 +67,26 @@ class Companies extends CActiveRecord
     {
         return parent::model($className);
     }
+
+    /**
+     * Custom method for take companies list as array
+     *
+     * @return array
+     */
+    public static function getCompaniesAsArray()
+    {
+        $companies = [
+            '' => 'Select company...',
+        ];
+
+        $result = Companies::model()->findAll();
+
+        if ($result) {
+            foreach ($result as $obj) {
+                $companies[$obj->id] = $obj->name;
+            }
+        }
+
+        return $companies;
+    }
 }

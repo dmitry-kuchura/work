@@ -4,57 +4,75 @@ class ApiController extends MainController
 {
     public $post;
 
-    public $layout = false;
-
     protected function beforeAction($action)
     {
-        $this->post = json_decode(Yii::app()->request->getRawBody());
+        $this->post = $_POST;
 
         return true;
     }
 
+    /**
+     * Method for AJAX Request for create new User
+     *
+     * @return mixed|string
+     *
+     */
     public function actionCreateUser()
     {
         $model = new Users();
 
-//        if (Yii::app()->request->post()) {
-//            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-//                $model->save();
-//
-//                Yii::$app->response->format = Response::FORMAT_JSON;
-//
-//                return ['success' => true, 'message' => 'User created!'];
-//            }
-//        }
+        if ($this->post) {
+            $data = $this->post['Users'];
+            $model->name = $data['name'];
+            $model->email = $data['email'];
+            $model->company_id = $data['company_id'];
 
-        $companies = [
-            '' => 'Select company ...',
-        ];
-
-        $result = Companies::model()->findAll();
-
-
-        if ($result) {
-            foreach ($result as $obj) {
-                $companies[$obj->id] = $obj->name;
+            if ($model->validate() && $model->save()) {
+                $this->renderJSON([
+                    'success' => true,
+                    'message' => 'User created!',
+                    'table' => $model->tableName(),
+                    'data' => $data,
+                ]);
             }
         }
 
-        return $this->render('user-form', [
+        return $this->renderPartial('user-form', [
             'model' => $model,
-            'companies' => $companies,
+            'companies' => Companies::getCompaniesAsArray(),
         ]);
     }
 
+    /**
+     * Method for AJAX Request for create new Company
+     *
+     * @return mixed|string
+     */
     public function actionCreateCompany()
     {
         $model = new Companies();
 
-        $types = Yii::app()->params['types'];
+        if ($this->post) {
+            $data = $this->post['Companies'];
+            $model->name = $data['name'];
+            $model->quota_type = $data['quota_type'];
+            $model->quota = Helper::revertFileSizeConvert($data['quota'], $data['quota_type']);
+            $model->created_at = time();
+            $model->updated_at = time();
 
-        return $this->render('company-form', [
+            if ($model->validate() && $model->save()) {
+                $this->renderJSON([
+                    'success' => true,
+                    'message' => 'Company created!',
+                    'table' => $model->tableName(),
+                    'data' => $data,
+                ]);
+            }
+        }
+
+        return $this->renderPartial('company-form', [
             'model' => $model,
-            'types' => $types,
+            'types' => Yii::app()->params['types'],
         ]);
     }
 

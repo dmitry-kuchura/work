@@ -56,4 +56,15 @@ class MainController extends CController
 
         echo implode("\n", $js);
     }
+
+    /**
+     * Return data to browser as JSON and end application.
+     * @param array $data
+     */
+    protected function renderJSON($data)
+    {
+        header('Content-type: application/json');
+        echo CJSON::encode($data);
+        Yii::app()->end();
+    }
 }
