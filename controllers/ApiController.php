@@ -36,6 +36,11 @@ class ApiController extends MainController
                     'table' => $model->tableName(),
                     'data' => $data,
                 ]);
+            } else {
+                $this->renderJSON([
+                    'success' => false,
+                    'message' => 'Not created!',
+                ]);
             }
         }
 
@@ -68,6 +73,11 @@ class ApiController extends MainController
                     'message' => 'Company created!',
                     'table' => $model->tableName(),
                     'data' => $data,
+                ]);
+            } else {
+                $this->renderJSON([
+                    'success' => false,
+                    'message' => 'Not created!',
                 ]);
             }
         }

@@ -31,6 +31,7 @@ class Users extends CActiveRecord
             ['company_id', 'numerical', 'integerOnly' => true],
             ['name', 'length', 'max' => 150],
             ['email', 'length', 'max' => 50],
+            ['email', 'unique'],
         ];
     }
 

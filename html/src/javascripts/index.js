@@ -56,9 +56,12 @@ $('.modal-content').on('submit', '.form-ajax', function (event) {
 
     axios.post(action, data)
         .then(function (response) {
-            console.log(response.data);
-            $('.close').click();
-            generate(response.data.message, 'success', 5000);
+            if (response.data.success === true) {
+                $('.close').click();
+                generate(response.data.message, 'success', 5000);
+            } else {
+                generate(response.data.message, 'warning', 5000);
+            }
             // setTimeout(function () {
             //     location.reload();
             // }, 1000);
