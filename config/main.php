@@ -19,17 +19,11 @@ return [
         'user' => [
             'allowAutoLogin' => true,
         ],
+        //  Load jquery 2.2.4 in webpack compile file
         'clientScript' => [
             'scriptMap' => [
                 'jquery.js' => false,
-                'jquery.yiiactiveform.js' => false,
             ],
-//            'packages' => [
-//                'yiiactiveform' => [
-//                    'js' => [YII_DEBUG ? 'jquery.yiiactiveform.js' : 'jquery.yiiactiveform.js'],
-//                    'position' => CClientScript::POS_END,
-//                ],
-//            ],
         ],
         'assetManager' => [
             'basePath' => HOST . DIRECTORY_SEPARATOR . 'web' . DIRECTORY_SEPARATOR . 'assets',

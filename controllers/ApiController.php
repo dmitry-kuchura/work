@@ -28,7 +28,7 @@ class ApiController extends MainController
 //        }
 
         $companies = [
-            '' => 'Select company ...'
+            '' => 'Select company ...',
         ];
 
         $result = Companies::model()->findAll();
@@ -49,25 +49,6 @@ class ApiController extends MainController
     public function actionCreateCompany()
     {
         $model = new Companies();
-
-//        if (Yii::app()->request->post()) {
-//            $model->load(Yii::$app->request->post());
-//            $model->created_at = time();
-//            $model->updated_at = time();
-//
-//            /**
-//             * Convert 'quota' value to bytes
-//             */
-//            $model->quota = Helper::revertFileSizeConvert($model->quota, $model->quota_type);
-//
-//            if ($model->validate()) {
-//                $model->save();
-//
-//                Yii::$app->response->format = Response::FORMAT_JSON;
-//
-//                return ['success' => true, 'message' => 'Company created!'];
-//            }
-//        }
 
         $types = Yii::app()->params['types'];
 

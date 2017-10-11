@@ -22,15 +22,15 @@
     </div>
 
     <div class="form-group">
-        <?php echo $form->labelEx($model, 'email', ['class' => 'control-label']); ?>
-        <?php echo $form->textField($model, 'email', ['class' => 'form-control']); ?>
-        <?php echo $form->error($model, 'email'); ?>
+        <?php echo $form->labelEx($model, 'quota', ['class' => 'control-label']); ?>
+        <?php echo $form->textField($model, 'quota', ['class' => 'form-control']); ?>
+        <?php echo $form->error($model, 'quota'); ?>
     </div>
 
     <div class="form-group">
-        <?php echo $form->labelEx($model, 'company_id', ['class' => 'control-label']); ?>
-        <?php echo $form->dropDownList($model, 'company_id', $companies, ['class' => 'form-control']); ?>
-        <?php echo $form->error($model, 'company_id'); ?>
+        <?php echo $form->labelEx($model, 'quota_type', ['class' => 'control-label']); ?>
+        <?php echo $form->dropDownList($model, 'quota_type', $types, ['class' => 'form-control']); ?>
+        <?php echo $form->error($model, 'quota_type'); ?>
     </div>
 
     <div class="form-group">

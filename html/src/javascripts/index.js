@@ -1,8 +1,7 @@
-//include JQuery
 let $ = require('jquery');
 global.jQuery = $;
 
-// include Bootstrap
+require('jquery-validation/dist/jquery.validate.min');
 require('bootstrap');
 
 import axios from 'axios'
@@ -28,17 +27,14 @@ if ($modalBtn.length) {
  * Form submit function
  * Send FormData
  */
-$('form').on('beforeSubmit', '.form-ajax', function (event) {
+$('.modal-content').on('submit', '.form-ajax', function (event) {
     event.preventDefault();
-    alert('sdfsdfsdf');
 
     let form = $(this);
     let action = $(this).attr('action');
     let data = new FormData($(this)[0]);
 
-    axios.post(action, {
-        data: data
-    })
+    axios.post(action, data)
         .then(function (response) {
             $('.close').click();
             generate(response.message, 'success', 5000);
