@@ -99,3 +99,44 @@ $('.deleteButton').on('click', function () {
             console.log(error);
         });
 });
+
+/**
+ * Function call action and generate random data with Faker
+ */
+$('.generateData').on('click', function () {
+    axios.post('api/generate-transfer-log')
+        .then(function (response) {
+            if (response.data.success === true) {
+                generate(response.data.message, 'success', 5000);
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+});
+
+/**
+ * Generate report transferred traffic for companies to current month
+ */
+$('.generateReport').on('click', function () {
+    let month = $('#monthSelect').val();
+    let report = $('#report');
+
+    axios.post('api/get-report', {month: month})
+        .then(function (response) {
+            if (response.data.success === true) {
+                let html = $(data.result);
+                report.empty();
+                html.appendTo(report);
+                report.slideDown();
+
+                $('#transfer').slideUp();
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+});

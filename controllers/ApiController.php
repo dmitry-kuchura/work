@@ -167,6 +167,33 @@ class ApiController extends MainController
         ]);
     }
 
+    public function actionGenerateTransferLog()
+    {
+        for ($i = 1; $i <= 500; $i++) {
+            $model = new TransferLogs();
+            $faker = Faker\Factory::create();
+            // 10 GB to 1 TB
+            $minBytes = 10000000000;
+            $maxBytes = 1000000000000;
+
+            $criteria = new CDbCriteria();
+            $criteria->limit = 1;
+            $criteria->order = 'id DESC';
+
+            $model->user_id = Users::model()->find($criteria)->id;
+            $model->date_time = $faker->dateTimeThisMonth($max = '+6 month')->getTimestamp();
+            $model->resource = $faker->domainName;
+            $model->transferred = rand($minBytes, $maxBytes);
+
+            $model->save();
+        }
+
+        $this->renderJSON([
+            'success' => true,
+            'message' => 'Transfer data was generated!',
+        ]);
+    }
+
     /**
      * This method deleted current row from database in needed table
      */
