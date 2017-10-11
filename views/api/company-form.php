@@ -23,7 +23,7 @@
 
     <div class="form-group">
         <?php echo $form->labelEx($model, 'quota', ['class' => 'control-label']); ?>
-        <?php echo $form->textField($model, 'quota', ['class' => 'form-control']); ?>
+        <?php echo $form->textField($model, 'quota', ['class' => 'form-control', 'value' => (int)Helper::fileSizeConvert($model['quota'])]); ?>
         <?php echo $form->error($model, 'quota'); ?>
     </div>
 

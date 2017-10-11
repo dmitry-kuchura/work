@@ -32,8 +32,10 @@ return [
             'urlFormat' => 'path',
             'showScriptName' => false,
             'rules' => [
-                'api/create-user' => 'api/CreateUser',
-                'api/create-company' => 'api/CreateCompany',
+                'api/user-create' => 'api/CreateUser',
+                'api/user-update/' => 'api/UpdateUser',
+                'api/company-create' => 'api/CreateCompany',
+                'api/company-update/' => 'api/UpdateCompany',
                 'api/<action>' => 'api/<action>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
