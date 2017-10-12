@@ -37,7 +37,13 @@ class ApiController extends MainController
                     'success' => true,
                     'message' => 'User created!',
                     'table' => $model->tableName(),
-                    'data' => $data,
+                    'method' => 'create',
+                    'data' => [
+                        'id' => $model->id,
+                        'name' => $model->name,
+                        'email' => $model->email,
+                        'company' => $model->company->name,
+                    ],
                 ]);
             } else {
                 $this->renderJSON([
@@ -74,7 +80,13 @@ class ApiController extends MainController
                     'success' => true,
                     'message' => 'User updated!',
                     'table' => $model->tableName(),
-                    'data' => $data,
+                    'method' => 'update',
+                    'update' => [
+                        'id' => $id,
+                        'name' => $data['name'],
+                        'email' => $data['email'],
+                        'company' => $model->company->name,
+                    ],
                 ]);
             } else {
                 $this->renderJSON([
@@ -167,11 +179,15 @@ class ApiController extends MainController
         ]);
     }
 
+    /**
+     * Method for generate custom data with Faker
+     * @link https://github.com/fzaninotto/Faker
+     */
     public function actionGenerateTransferLog()
     {
         for ($i = 1; $i <= 500; $i++) {
-            $model = new TransferLogs();
             $faker = Faker\Factory::create();
+            $model = new TransferLogs();
             // 10 GB to 1 TB
             $minBytes = 10000000000;
             $maxBytes = 1000000000000;
@@ -182,10 +198,10 @@ class ApiController extends MainController
 
             $model->user_id = Users::model()->find($criteria)->id;
             $model->date_time = $faker->dateTimeThisMonth($max = '+6 month')->getTimestamp();
-            $model->resource = $faker->domainName;
+            $model->resource = $faker->freeEmailDomain;
             $model->transferred = rand($minBytes, $maxBytes);
 
-            $model->save();
+            $model->save(false);
         }
 
         $this->renderJSON([

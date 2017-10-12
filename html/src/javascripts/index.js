@@ -4,77 +4,36 @@ global.jQuery = $;
 require('bootstrap');
 
 import axios from 'axios'
-import Noty from 'noty';
+import toastr from 'toastr';
 
 /**
- * This function generated some messages with Noty
+ * This function generated some messages with Toastr
  *
- * @link https://github.com/needim/noty
+ * @link https://github.com/CodeSeven/toastr
  * @param message
  * @param type
  * @param time
  */
 function generate(message, type, time) {
-    new Noty({
-        type: type,
-        text: message,
-        timeout: time || false,
-        layout: 'bottomRight',
-        animation: {
-            open: function (promise) {
-                let n = this;
-                new Bounce()
-                    .translate({
-                        from: {x: 450, y: 0}, to: {x: 0, y: 0},
-                        easing: "bounce",
-                        duration: 1000,
-                        bounces: 4,
-                        stiffness: 3
-                    })
-                    .scale({
-                        from: {x: 1.2, y: 1}, to: {x: 1, y: 1},
-                        easing: "bounce",
-                        duration: 1000,
-                        delay: 100,
-                        bounces: 4,
-                        stiffness: 1
-                    })
-                    .scale({
-                        from: {x: 1, y: 1.2}, to: {x: 1, y: 1},
-                        easing: "bounce",
-                        duration: 1000,
-                        delay: 100,
-                        bounces: 6,
-                        stiffness: 1
-                    })
-                    .applyTo(n.barDom, {
-                        onComplete: function () {
-                            promise(function (resolve) {
-                                resolve();
-                            })
-                        }
-                    });
-            },
-            close: function (promise) {
-                let n = this;
-                new Bounce()
-                    .translate({
-                        from: {x: 0, y: 0}, to: {x: 450, y: 0},
-                        easing: "bounce",
-                        duration: 500,
-                        bounces: 4,
-                        stiffness: 1
-                    })
-                    .applyTo(n.barDom, {
-                        onComplete: function () {
-                            promise(function (resolve) {
-                                resolve();
-                            })
-                        }
-                    });
-            }
-        }
-    }).show();
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": time || "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+
+    toastr[type](message);
 }
 
 /**
@@ -85,7 +44,6 @@ let $modalPopup = $('#modal-popup');
 if ($modalBtn.length) {
     $modalBtn.on('click', function () {
         let target = $(this).attr('data-target');
-        console.log(target);
 
         $modalPopup.modal('show').find('#modal-content').load(target);
     });
@@ -105,15 +63,30 @@ $('.modal-content').on('submit', '.form-ajax', function (event) {
 
     axios.post(action, data)
         .then(function (response) {
-            if (response.data.success === true) {
+            let result = response.data;
+
+            if (result.success === true) {
                 $('.close').click();
-                generate(response.data.message, 'success', 5000);
+                generate(result.message, 'success', 5000);
+                console.log(result);
+                if (result.table === 'users') {
+                    if (result.method === 'update') {
+                        $('#' + result.data.id).html(result.data.name + ' / ' + result.data.email + ' / ' + result.data.company);
+                    } else {
+                        let usersList = $('#usersData');
+                        let html = '<li class="list-group-item usersData-item">' +
+                            '<div class="usersData-item__text" id="' + result.data.id + '">' + result.data.name + ' / ' + result.data.email + '</div>' +
+                            '<div class="usersData-item__buttons">' +
+                            '<button class="btn btn-info modal-btn" data-target="api/user-update?id=' + result.data.id + '"> Edit </button>' +
+                            '<button class="btn btn-danger deleteButton" data-table="users" data-id="' + result.data.id + '">Delete</button>' +
+                            '</div>' +
+                            '</li>';
+                        html.appendTo(usersList);
+                    }
+                }
             } else {
                 generate(response.data.message, 'warning', 5000);
             }
-            // setTimeout(function () {
-            //     location.reload();
-            // }, 1000);
         })
         .catch(function (error) {
             console.log(error);
