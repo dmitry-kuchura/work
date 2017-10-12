@@ -240,16 +240,13 @@ class ApiController extends MainController
             GROUP BY `month`, `company_name`
             HAVING `month` = ' . $month . '
             ORDER BY `month` ASC');
-
-        $report = $this->renderFile(Yii::getPathOfAlias('application.views.api.report') . '.php', [
-            'result' => $result,
-            'months' => Yii::app()->params['months'],
-            'month' => $month,
-        ]);
-
         $this->renderJSON([
             'success' => true,
-            'result' => $report,
+            'result' => $this->show('api/report', [
+                'result' => $result,
+                'months' => Yii::app()->params['months'],
+                'month' => $month,
+            ]),
         ]);
     }
 

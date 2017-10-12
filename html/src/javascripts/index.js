@@ -39,15 +39,10 @@ function generate(message, type, time) {
 /**
  * Call to modal window popup
  */
-let $modalBtn = $('.modal-btn');
-let $modalPopup = $('#modal-popup');
-if ($modalBtn.length) {
-    $modalBtn.on('click', function () {
-        let target = $(this).attr('data-target');
-
-        $modalPopup.modal('show').find('#modal-content').load(target);
-    });
-}
+$('body').on('click', '.modal-btn', function () {
+    let target = $(this).attr('data-target');
+    $('#modal-popup').modal('show').find('#modal-content').load(target);
+});
 
 /**
  * Form submit function
@@ -104,7 +99,7 @@ $('.modal-content').on('submit', '.form-ajax', function (event) {
  * @param table
  * @param id
  */
-$('.deleteButton').on('click', function () {
+$('body').on('click', '.deleteButton', function () {
     let element = $(this).closest('.usersData-item');
     let table = $(this).data('table');
     let id = $(this).data('id');
@@ -150,19 +145,19 @@ $('.generateData').on('click', function () {
 $('.generateReport').on('click', function () {
     let month = $('#monthSelect').val();
     let report = $('#report');
-
-    console.log(month);
-    console.log(report);
+    let transfer = $('#transfer');
 
     axios.post('api/get-report', {month: month})
         .then(function (response) {
+            console.log(response);
             if (response.data.success === true) {
-                let html = $(data.result);
+                let html = $(response.data.result);
                 report.empty();
-                html.appendTo(report);
+
+                report.append(html);
                 report.slideDown();
 
-                $('#transfer').slideUp();
+                transfer.slideUp();
             }
         })
         .catch(function (error) {
