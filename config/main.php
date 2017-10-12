@@ -37,6 +37,7 @@ return [
                 'api/company-create' => 'api/CreateCompany',
                 'api/company-update' => 'api/UpdateCompany',
                 'api/generate-transfer-log' => 'api/GenerateTransferLog',
+                'api/get-report' => 'api/GetReport',
                 'api/<action>' => 'api/<action>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',

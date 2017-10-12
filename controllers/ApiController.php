@@ -38,12 +38,9 @@ class ApiController extends MainController
                     'message' => 'User created!',
                     'table' => $model->tableName(),
                     'method' => 'create',
-                    'data' => [
-                        'id' => $model->id,
-                        'name' => $model->name,
-                        'email' => $model->email,
-                        'company' => $model->company->name,
-                    ],
+                    'data' => $this->renderFile(Yii::getPathOfAlias('application.views.api.user-data') . '.php', [
+                        'obj' => $model,
+                    ]),
                 ]);
             } else {
                 $this->renderJSON([
@@ -197,19 +194,48 @@ class ApiController extends MainController
             $model->resource = $faker->freeEmailDomain;
             $model->transferred = rand($minBytes, $maxBytes);
 
-            if ($model->save()) {
-                $this->renderJSON([
-                    'success' => true,
-                    'message' => 'Transfer data was generated!',
-                ]);
-            } else {
-                $this->renderJSON([
-                    'success' => false,
-                    'message' => 'Transfer data was not generated!',
-                ]);
-            }
+            $model->save(false);
         }
 
+        $this->renderJSON([
+            'success' => true,
+            'message' => 'Transfer data was generated!',
+        ]);
+
+    }
+
+    public function actionGetReport()
+    {
+        $month = $this->raw->month;
+        $result = Yii::app()->db->createCommand('SELECT
+                MONTH (
+                    FROM_UNIXTIME(
+                        `transfer_logs`.`date_time`
+                    )
+                ) AS `month`,
+                SUM(
+                    `transfer_logs`.`transferred`
+                ) AS `transferred`,
+                `companies`.`quota` AS `quota`,
+                `companies`.`name` AS `company_name`
+            FROM
+                `transfer_logs`
+            LEFT JOIN `users` ON `users`.`id` = `transfer_logs`.`user_id`
+            LEFT JOIN `companies` ON `users`.`company_id` = `companies`.`id`
+            GROUP BY `month`, `company_name`
+            HAVING `month` = ' . $month . '
+            ORDER BY `month` ASC');
+
+        $report = $this->renderFile(Yii::getPathOfAlias('application.views.api.report') . '.php', [
+            'result' => $result,
+            'months' => Yii::app()->params['months'],
+            'month' => $month,
+        ]);
+
+        $this->renderJSON([
+            'success' => true,
+            'result' => $report,
+        ]);
     }
 
     /**

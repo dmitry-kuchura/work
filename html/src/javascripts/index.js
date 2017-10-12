@@ -149,6 +149,9 @@ $('.generateReport').on('click', function () {
     let month = $('#monthSelect').val();
     let report = $('#report');
 
+    console.log(month);
+    console.log(report);
+
     axios.post('api/get-report', {month: month})
         .then(function (response) {
             if (response.data.success === true) {
