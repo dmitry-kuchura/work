@@ -13,7 +13,7 @@
             <?php if ($obj->transferred > $obj->quota): ?>
                 <li class="list-group-item usersData-item">
                     <div class="usersData-item__text">
-                        <?php echo $obj->company_name . ' / ' . Helper::fileSizeConvert($obj->transferred) . ' / ' . Helper::fileSizeConvert($obj->quota); ?>
+                        <?php echo $obj->company_name . ' / ' . Helper::fileSizeConvert($obj->transferred) . ' / Limit: [' . Helper::fileSizeConvert($obj->quota) . ']'; ?>
                     </div>
                 </li>
             <?php endif; ?>
