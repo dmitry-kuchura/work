@@ -17,7 +17,7 @@
     <nav class="navbar-inverse navbar-fixed-top navbar" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <?php echo CHtml::link('Yii 1.x WEB Framework', Yii::app()->request->baseUrl, ['class' => 'navbar-brand']); ?>
+                <?php echo CHtml::link('Yii 1.x WEB Framework', '/', ['class' => 'navbar-brand']); ?>
             </div>
             <div class="collapse navbar-collapse"></div>
         </div>
