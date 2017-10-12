@@ -8,7 +8,7 @@
             <li class="list-group-item usersData-item">
                 <div class="usersData-item__text" id="<?php echo $obj->id; ?>">
                     <?php echo $obj->name . ' / ' . $obj->email . ' / '; ?>
-                    <?php echo $obj->company->id ? $obj->company->name : 'Company deleted!'; ?>
+                    <?php echo isset($obj->company->id) ? $obj->company->name : 'Company deleted!'; ?>
                 </div>
                 <div class="usersData-item__buttons">
                     <button class="btn btn-info modal-btn"
