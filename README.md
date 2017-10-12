@@ -23,19 +23,14 @@ After install you must create database name - `yii`
 If used Linux/MacOS need change mode for directories
 
 chmod -R 755 /web/assets
-chmod -R 755 /runtime
+chmod -R 777 /runtime
 
 ```
 
 ## Install STEP 2
 
 ```
-# Linux
-$ php yiic migrate
-```
-```
-# Windows
-$ yiic migrate
+upload _SQL/yii.sql file
 ```
 
 ### Directory Structure
