@@ -30,6 +30,15 @@ chmod -R 777 /runtime
 ## Install STEP 2
 
 ```
+# Linux/MacOS
+$ php yiic.php migrate
+```
+```
+# Windows
+$ yiic migrate
+```
+```
+OR
 upload _SQL/yii.sql file
 ```
 
