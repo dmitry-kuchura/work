@@ -200,9 +200,9 @@ class ApiController extends MainController
         for ($i = 1; $i <= 500; $i++) {
             $faker = Faker\Factory::create();
             $model = new TransferLogs();
-            // 10 GB to 1 TB
-            $minBytes = 10000000000;
-            $maxBytes = 1000000000000;
+            // 1 GB to 100 GB
+            $minBytes = 1000000000;
+            $maxBytes = 100000000000;
 
             $model->user_id = Users::model()->find(['select' => '*, rand() as rand', 'order' => 'rand'])->id;
             $model->date_time = $faker->dateTimeThisMonth($max = '+6 month')->getTimestamp();
