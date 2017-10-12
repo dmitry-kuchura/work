@@ -5,7 +5,7 @@ class m171009_092925_transfer_logs extends CDbMigration
     public function up()
     {
         $this->createTable('transfer_logs', [
-            'id' => 'int(11) NOT NULL',
+            'id' => 'pk',
             'user_id' => 'int(11) NOT NULL',
             'date_time' => 'int(11) NOT NULL',
             'resource' => 'varchar(150) NOT NULL',

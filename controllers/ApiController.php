@@ -192,22 +192,24 @@ class ApiController extends MainController
             $minBytes = 10000000000;
             $maxBytes = 1000000000000;
 
-            $criteria = new CDbCriteria();
-            $criteria->limit = 1;
-            $criteria->order = 'id DESC';
-
-            $model->user_id = Users::model()->find($criteria)->id;
+            $model->user_id = Users::model()->find(['select' => '*, rand() as rand', 'order' => 'rand'])->id;
             $model->date_time = $faker->dateTimeThisMonth($max = '+6 month')->getTimestamp();
             $model->resource = $faker->freeEmailDomain;
             $model->transferred = rand($minBytes, $maxBytes);
 
-            $model->save(false);
+            if ($model->save()) {
+                $this->renderJSON([
+                    'success' => true,
+                    'message' => 'Transfer data was generated!',
+                ]);
+            } else {
+                $this->renderJSON([
+                    'success' => false,
+                    'message' => 'Transfer data was not generated!',
+                ]);
+            }
         }
 
-        $this->renderJSON([
-            'success' => true,
-            'message' => 'Transfer data was generated!',
-        ]);
     }
 
     /**

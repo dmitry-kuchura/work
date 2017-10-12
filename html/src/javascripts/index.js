@@ -133,6 +133,8 @@ $('.generateData').on('click', function () {
                 setTimeout(function () {
                     location.reload();
                 }, 1000);
+            } else {
+                generate(response.data.message, 'warning', 5000);
             }
         })
         .catch(function (error) {
