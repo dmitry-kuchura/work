@@ -6,7 +6,7 @@
     <ul id="usersData" class="list-group usersData">
         <?php foreach ($result as $obj): ?>
             <li class="list-group-item usersData-item">
-                <div class="usersData-item__text" id="<?php echo $obj->id; ?>">
+                <div class="usersData-item__text" id="<?php echo 'user-' . $obj->id; ?>">
                     <?php echo $obj->name . ' / ' . $obj->email . ' / '; ?>
                     <?php echo isset($obj->company->id) ? $obj->company->name : 'Company deleted!'; ?>
                 </div>

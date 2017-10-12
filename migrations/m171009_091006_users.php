@@ -8,7 +8,7 @@ class m171009_091006_users extends CDbMigration
             'id' => 'pk',
             'name' => 'varchar(150) NOT NULL',
             'email' => 'varchar(50) NOT NULL',
-            'company_id' => 'int(10) NOT NULL',
+            'company_id' => 'int(10) DEFAULT NULL',
         ]);
     }
 

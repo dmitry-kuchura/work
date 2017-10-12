@@ -68,20 +68,22 @@ $('.modal-content').on('submit', '.form-ajax', function (event) {
             if (result.success === true) {
                 $('.close').click();
                 generate(result.message, 'success', 5000);
-                console.log(result);
+
                 if (result.table === 'users') {
                     if (result.method === 'update') {
-                        $('#' + result.data.id).html(result.data.name + ' / ' + result.data.email + ' / ' + result.data.company);
+                        $('#user-' + result.data.id).html(result.data.name + ' / ' + result.data.email + ' / ' + result.data.company);
                     } else {
                         let usersList = $('#usersData');
-                        let html = '<li class="list-group-item usersData-item">' +
-                            '<div class="usersData-item__text" id="' + result.data.id + '">' + result.data.name + ' / ' + result.data.email + '</div>' +
-                            '<div class="usersData-item__buttons">' +
-                            '<button class="btn btn-info modal-btn" data-target="api/user-update?id=' + result.data.id + '"> Edit </button>' +
-                            '<button class="btn btn-danger deleteButton" data-table="users" data-id="' + result.data.id + '">Delete</button>' +
-                            '</div>' +
-                            '</li>';
-                        html.appendTo(usersList);
+                        usersList.append(result.html);
+                    }
+                }
+
+                if (result.table === 'companies') {
+                    if (result.method === 'update') {
+                        $('#company-' + result.data.id).html(result.data.name + ' / ' + result.data.quota + ' ' + result.data.quota_type);
+                    } else {
+                        let usersList = $('#companyData');
+                        usersList.append(result.html);
                     }
                 }
             } else {

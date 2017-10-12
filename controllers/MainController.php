@@ -67,4 +67,15 @@ class MainController extends CController
         echo CJSON::encode($data);
         Yii::app()->end();
     }
+
+    public static function show($file, $data)
+    {
+        ob_start();
+
+        extract($data, EXTR_SKIP);
+        $filePath = Yii::getPathOfAlias('application.views.' . $file) . '.php';
+        include $filePath;
+
+        return ob_get_clean();
+    }
 }

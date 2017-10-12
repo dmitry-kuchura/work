@@ -8,6 +8,12 @@ class ApiController extends MainController
     public $post;
     public $raw;
 
+    /**
+     * Define $_POST data
+     *
+     * @param $action
+     * @return bool
+     */
     protected function beforeAction($action)
     {
         $this->post = $_POST;
@@ -36,9 +42,9 @@ class ApiController extends MainController
                 $this->renderJSON([
                     'success' => true,
                     'message' => 'User created!',
-                    'table' => $model->tableName(),
                     'method' => 'create',
-                    'data' => $this->renderFile(Yii::getPathOfAlias('application.views.api.user-data') . '.php', [
+                    'table' => $model->tableName(),
+                    'html' => $this->show('api/user-data', [
                         'obj' => $model,
                     ]),
                 ]);
@@ -76,9 +82,9 @@ class ApiController extends MainController
                 $this->renderJSON([
                     'success' => true,
                     'message' => 'User updated!',
-                    'table' => $model->tableName(),
                     'method' => 'update',
-                    'update' => [
+                    'table' => $model->tableName(),
+                    'data' => [
                         'id' => $id,
                         'name' => $data['name'],
                         'email' => $data['email'],
@@ -120,8 +126,11 @@ class ApiController extends MainController
                 $this->renderJSON([
                     'success' => true,
                     'message' => 'Company created!',
+                    'method' => 'create',
                     'table' => $model->tableName(),
-                    'data' => $data,
+                    'html' => $this->show('api/company-data', [
+                        'obj' => $model,
+                    ]),
                 ]);
             } else {
                 $this->renderJSON([
@@ -159,8 +168,14 @@ class ApiController extends MainController
                 $this->renderJSON([
                     'success' => true,
                     'message' => 'Company updated!',
+                    'method' => 'update',
                     'table' => $model->tableName(),
-                    'data' => $data,
+                    'data' => [
+                        'id' => $id,
+                        'name' => $data['name'],
+                        'quota' => $data['quota'],
+                        'quota_type' => $data['quota_type'],
+                    ],
                 ]);
             } else {
                 $this->renderJSON([
