@@ -219,27 +219,24 @@ class ApiController extends MainController
 
     }
 
+    /**
+     * Method for generate report all companies
+     */
     public function actionGetReport()
     {
         $month = $this->raw->month;
         $result = Yii::app()->db->createCommand('SELECT
-                MONTH (
-                    FROM_UNIXTIME(
-                        `transfer_logs`.`date_time`
-                    )
-                ) AS `month`,
-                SUM(
-                    `transfer_logs`.`transferred`
-                ) AS `transferred`,
+                MONTH(FROM_UNIXTIME(`transfer_logs`.`date_time`)) AS `month`,
+                SUM(`transfer_logs`.`transferred`) AS `transferred`,
                 `companies`.`quota` AS `quota`,
                 `companies`.`name` AS `company_name`
-            FROM
-                `transfer_logs`
+            FROM `transfer_logs`
             LEFT JOIN `users` ON `users`.`id` = `transfer_logs`.`user_id`
             LEFT JOIN `companies` ON `users`.`company_id` = `companies`.`id`
             GROUP BY `month`, `company_name`
             HAVING `month` = ' . $month . '
-            ORDER BY `month` ASC');
+            ORDER BY `month` ASC')->setFetchMode(PDO::FETCH_OBJ)->queryAll();
+
         $this->renderJSON([
             'success' => true,
             'result' => $this->show('api/report', [
