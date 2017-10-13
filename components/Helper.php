@@ -13,7 +13,11 @@ class Helper
         $base = log($bytes) / log(1024);
         $suffix = ['', 'KB', 'MB', 'GB', 'TB'];
         $f_base = floor($base);
-        return round(pow(1024, $base - floor($base)), 1) . ' ' . $suffix[$f_base];
+        if ($bytes == 0) {
+            return 0;
+        } else {
+            return round(pow(1024, $base - floor($base)), 1) . ' ' . $suffix[$f_base];
+        }
     }
 
     /**
