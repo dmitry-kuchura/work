@@ -27,7 +27,7 @@ class Users extends CActiveRecord
     public function rules()
     {
         return [
-            ['name, email', 'company_id', 'required'],
+            ['name, email, company_id', 'required'],
             ['company_id', 'numerical', 'integerOnly' => true],
             ['name', 'length', 'max' => 150],
             ['email', 'length', 'max' => 50],

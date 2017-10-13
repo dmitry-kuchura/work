@@ -5,7 +5,7 @@
 ?>
 
 <?php $form = $this->beginWidget('CActiveForm', [
-    'id' => 'contact-form',
+    'id' => 'user-form',
     'htmlOptions' => [
         'class' => 'form-ajax',
     ],
